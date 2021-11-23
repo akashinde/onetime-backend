@@ -1,9 +1,5 @@
 const Project = require('../models/Project.js')
-
-function sendError(error, res) {
-  res.send(404).json({ Message: error.message })
-  console.log('ERROR:', error.message)
-}
+const { sendError, createError } = require('./commonUtils.js')
 
 const getAllProjects = async (req, res) => {
   try {
@@ -41,7 +37,7 @@ const postProject = async (req, res) => {
     await project.save()
     res.status(201).json(project)
   } catch (error) {
-    sendError(error, res)
+    createError(error, res)
   }
 }
 
